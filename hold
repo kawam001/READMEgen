@@ -1,0 +1,121 @@
+class MarkDown {
+      static generateReadme(response) {
+        
+        return
+
+        `    
+           # ${response.title}
+           ## Table of Contents
+           - [Project Description](#description)
+           - [Installation Instructions](#installation)
+           - [Project Usage](#usage)
+           - [Contributing Information](#contributing)
+           - [Contact for Questions](#contact)
+           - [License](#License)
+
+           ## Project Description
+
+           ${response.description}
+
+           ## Installation Instructions
+           ${response.installation}
+           ## Project Usage
+           ${response.usage}
+
+           ## Contributing Information
+           ${response.contributing}
+
+           ## Contact for Questions
+           ${response.email}
+           ${response.github}
+           ## License
+           ${response.license}
+           
+`;          
+
+
+}
+}
+
+module.exports = MarkDown;
+
+const inquirer = require('inquirer');
+const MarkDown = require('./generateMarkdown');
+
+const questions  = [
+    {
+      type: 'input',
+      name: 'title',
+      message: 'Project Title:',
+    },
+
+    {
+        type: 'input',
+        name: 'description',
+        message: 'Project Description:',
+    },
+
+    
+    {
+      type: 'input',
+      name: 'installation',
+      message: 'Installation Instructions:',
+    },
+
+    {
+        type: 'input',
+        name: 'usage',
+        message: 'Project Usage:',
+    },
+
+
+    {
+        type: 'input',
+        name: 'contributing',
+        message: 'Contributing Information:',
+    },
+
+    {
+        type: 'input',
+        name: 'email',
+        message: '@email address for questions:',
+      },
+  
+      {
+          type: 'input',
+          name: 'github',
+          message: 'github address for questions:',
+      },
+  
+      
+      {
+        type: 'list',
+        name: 'license',
+        message: 'Choose License:',
+        choices: ['MIT','ISC','GNULv3'],
+        filter(val) {
+            return val.toLowerCase();
+        }
+      }    
+    
+
+  ];
+
+
+
+    function askQuestions() {
+        return inquirer.prompt(questions)
+            .then((response) => {
+                const outputRecord = MarkDown.generateReadme(response)
+                console.log(`Response ${response}`)
+                console.log(`Output ${outputRecord}`)
+                return response
+                })
+            .catch((error) => {
+              console.log(response)
+              console.log(`No Response === ${error} ====Error detected`)
+        })
+  }
+
+  askQuestions();
+  
