@@ -62,10 +62,7 @@ ${response.contributing}
 ${response.email}
 ${response.github}
 ## License
-${this.displayLicense(response.license)}
-
-     
-`;          
+${this.displayLicense(response.license)}`;          
 
 
 }
